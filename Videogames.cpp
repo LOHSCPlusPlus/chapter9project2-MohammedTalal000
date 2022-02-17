@@ -296,5 +296,4 @@ int main() {
   videogametype games[100];
   int num = readGameData(games);
   displayMenu(games, num);
-  cout << "Her";
 }
