@@ -56,20 +56,15 @@ void printGames(ostream &out, videogametype game){
     out << game.publisher << endl;
 }
 
-void removeGame(videogametype game[]) {
+void removeGame(videogametype game[], int num) {
   int index = 0;
   cout << "Enter the index you want to remove: ";
   cin >> index;
-  cin.ignore();
+  // cin.ignore();
   index = validInt(index);
-  for (int counter = 0; counter < 100; counter++) {
-    game[index].name[counter] = '\0';
-    game[index].platform[counter] = '\0';
-    game[index].releaseDate[counter] = '\0';
-    game[index].developer[counter] = '\0';
-    game[index].publisher[counter] = '\0';
+  for (index; index < num; index++) {
+    game[index] = game[index + 1];
   }
-  game[index].numSales = 0;
 }
 
 void addGame(videogametype games[], int &num) {
@@ -181,9 +176,6 @@ void printGamesToScreen(int num, videogametype games[]) {
         cout << "Index " << index << ": ";
         printGames(cout, games[index]);
     }
-    else {
-      cout << endl;
-    }
   }
 }
 
@@ -245,7 +237,7 @@ void displayMenu(videogametype games[], int num){
       printGamesToScreen(num, games);
     }
     else if (option == 2) {
-      removeGame(games);
+      removeGame(games, num);
     }
     else if (option == 3) {
      addGame(games, num);
@@ -276,7 +268,7 @@ void displayMenu(videogametype games[], int num){
       }
     }
     else if (option == 5) {
-      readGameData(games);
+      num = readGameData(games);
     }
     else if (option == 6) {
       printDataToFile(games, num);
